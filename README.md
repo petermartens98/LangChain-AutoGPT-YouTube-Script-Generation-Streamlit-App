@@ -1,63 +1,51 @@
 # LangChain AutoGPT YouTube Script Generation Streamlit App
-This is an app designed to generate YouTube video titles and scripts automatically using the GPT-3.5 language model. It utilizes Streamlit, a popular Python framework for building web applications, to create a user interface.
+
+The LangChain AutoGPT YouTube Script Generator is an advanced web application built using Streamlit and the GPT-3.5 language model. It enables automatic generation of YouTube video titles and scripts based on user prompts. The app utilizes prompt templates, conversation memory, and Wikipedia research integration to generate relevant and engaging content. With a user-friendly interface, the app displays the generated titles and scripts, along with expandable sections for viewing conversation history and Wikipedia research. It combines the power of the GPT-3.5 language model, Streamlit's web development capabilities, and intelligent features to streamline the content creation process for YouTube videos.
 
 ### Dependencies
 The following dependencies are required to run the app:
 
-os: Used for setting environment variables.
-
-apikey (imported from apikey.py): Contains the API key required to access the GPT-3.5 model.
-
-streamlit: The web framework used to build the user interface.
-
-langchain.llms.OpenAI: A module that provides an interface to interact with the OpenAI language model.
-
-langchain.prompts.PromptTemplate: Defines templates for generating prompts based on specific input variables.
-
-langchain.chains.LLMChain: Represents a language model chain that generates outputs based on prompts and manages conversational memory.
-
-langchain.memory.ConversationBufferMemory: A memory module that stores conversation history for specific input keys.
-
-langchain.utilities.WikipediaAPIWrapper: A utility module that provides a wrapper for making API calls to Wikipedia.
+1. os: Used for setting environment variables.
+2. apikey (imported from apikey.py): Contains the API key required to access the GPT-3.5 model.
+3. streamlit: The web framework used to build the user interface.
+4. langchain.llms.OpenAI: A module that provides an interface to interact with the OpenAI language model.
+5. langchain.prompts.PromptTemplate: Defines templates for generating prompts based on specific input variables.
+6. langchain.chains.LLMChain: Represents a language model chain that generates outputs based on prompts and manages conversational memory.
+7. langchain.memory.ConversationBufferMemory: A memory module that stores conversation history for specific input keys.
+8. langchain.utilities.WikipediaAPIWrapper: A utility module that provides a wrapper for making API calls to Wikipedia.
 
 ### App Framework
 
 The app's main interface is created using Streamlit. It consists of a title and a text input field where users can enter their desired prompt.
 
-##### The following variables are initialized:
+The following variables are initialized:
 
-prompt: Stores the user's input prompt.
+1. prompt: Stores the user's input prompt.
 
-Prompt Templates
+### Prompt Templates
 
-##### Two prompt templates are defined:
+Two prompt templates are defined:
 
-title_template: Takes a single input variable topic and generates a prompt for requesting a YouTube video title related to that topic.
-
-script_template: Takes two input variables title and wikipedia_research and generates a prompt for requesting a YouTube video script based on the given title, while leveraging research from Wikipedia.
+1. title_template: Takes a single input variable topic and generates a prompt for requesting a YouTube video title related to that topic.
+2. script_template: Takes two input variables title and wikipedia_research and generates a prompt for requesting a YouTube video script based on the given title, while leveraging research from Wikipedia.
 
 ### Memory
-##### Two conversation buffer memories are created:
-
-title_memory: Stores conversation history based on the input key 'topic'. This memory is used to maintain context during the generation of video titles.
-
-script_memory: Stores conversation history based on the input key 'title'. This memory is used to maintain context during the generation of video scripts.
+Two conversation buffer memories are created:
+1. title_memory: Stores conversation history based on the input key 'topic'. This memory is used to maintain context during the generation of video titles.
+2. script_memory: Stores conversation history based on the input key 'title'. This memory is used to maintain context during the generation of video scripts.
 
 ### LLMs (Language Model Managers)
-The app uses the GPT-3.5 model provided by OpenAI for generating titles and scripts.
-##### The following LLMs are initialized:
+The app uses the GPT-3.5 model provided by OpenAI for generating titles and scripts. The following LLMs are initialized:
 
-llm: An instance of the OpenAI class, which provides an interface to interact with the GPT-3.5 model. The temperature is set to 0.9, which 
+1. llm: An instance of the OpenAI class, which provides an interface to interact with the GPT-3.5 model. The temperature is set to 0.9, which 
 controls the randomness of the generated outputs.
-
-title_chain: An LLMChain that utilizes the title_template prompt template. It is responsible for generating YouTube video titles based on user prompts. The generated title is stored in the output key 'title', and conversation history is stored in title_memory.
-
-script_chain: An LLMChain that utilizes the script_template prompt template. It is responsible for generating YouTube video scripts based on user prompts, titles, and Wikipedia research. The generated script is stored in the output key 'script', and conversation history is stored in script_memory.
+2. title_chain: An LLMChain that utilizes the title_template prompt template. It is responsible for generating YouTube video titles based on user prompts. The generated title is stored in the output key 'title', and conversation history is stored in title_memory.
+3. script_chain: An LLMChain that utilizes the script_template prompt template. It is responsible for generating YouTube video scripts based on user prompts, titles, and Wikipedia research. The generated script is stored in the output key 'script', and conversation history is stored in script_memory.
 
 ### Wikipedia API Wrapper
 A wrapper class WikipediaAPIWrapper is used to make API calls to Wikipedia and retrieve research information based on the user's prompt. This information is utilized in the script_chain to generate more contextually relevant video scripts.
 
-Displaying Results
+### Displaying Results
 If a prompt is provided by the user, the following steps are executed:
 
 1. The title_chain generates a YouTube video title based on the prompt.
