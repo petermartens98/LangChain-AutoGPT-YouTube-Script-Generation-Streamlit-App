@@ -1,1 +1,1 @@
-# AutoGPT YouTub Script Generation StreamLit App
+# AutoGPT YouTube Script Generation StreamLit App
